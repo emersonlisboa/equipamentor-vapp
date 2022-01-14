@@ -16,8 +16,11 @@
       <q-item-label caption>
         {{ caption }}
       </q-item-label>
+      
     </q-item-section>
+
   </q-item>
+
 </template>
 
 <script lang="ts">

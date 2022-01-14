@@ -56,9 +56,30 @@ const linksList = [
     icon: 'dashboard',
     to: '/'
   },
+
+   {
+    title: 'Ordem de Trabalho',
+    caption: 'WorkOrders',
+    icon: 'assignment',
+    to: '/workOrder'
+  },
+
+  {
+    title: 'Solicitações',
+     caption: 'Requests',
+    icon: 'add',
+    to: '/workOrder'
+  },
+
+   {
+    title: 'Locais',
+    caption: 'Locations',
+    icon: 'place',
+    to: '/workOrder'
+  },
     {
-    title: 'Equipamento',
-    caption: 'Equipment',
+    title: 'Equipamentos',
+    caption: 'Assets',
     icon: 'settings',
     to: '/list-equipment'
   },
@@ -79,6 +100,13 @@ const linksList = [
     caption: 'Funcionário',
     icon: 'people',
     to: '/Department'
+  },
+
+  {
+    title: 'Configurações',
+    caption: 'Settings',
+    icon: 'settings',
+    to: '/Department1'
   },
 ];
 

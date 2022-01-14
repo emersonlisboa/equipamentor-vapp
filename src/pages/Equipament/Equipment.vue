@@ -191,7 +191,7 @@ export default {
     async postEquipment() {
       try {
         console.log(this.equipmentBody);
-        await axios.post(`http://localhost:3000/equipment`, this.equipmentBody);
+        await axios.post(`https://mes-app-a6wbv.ondigitalocean.app/equipment`, this.equipmentBody);
         this.salvou = true;
         this.onSubmit();
       } catch (error) {

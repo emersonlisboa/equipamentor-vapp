@@ -21,7 +21,7 @@ export default {
       try {
         
       
-        console.log(await axios.post(`http://localhost:3000/local`));
+        console.log(await axios.post(`https://mes-app-a6wbv.ondigitalocean.app/local`));
       
       } catch (error) {
         this.errorInput(error.response.data.message);

@@ -338,7 +338,7 @@ export default {
             icon: "cloud_done",
             position: "top",
             message:
-              "Equipamento cadastrado com sucesso!" & this.equipmentBody.title,
+              "Equipamento cadastrado com sucesso!" ,
             timeout: 2000,
           });
         }

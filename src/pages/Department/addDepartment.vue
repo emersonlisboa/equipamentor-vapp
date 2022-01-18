@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md" style="max-width: 600px">
+  <div class="q-pa-md" style="max-width: 600px " >
     <q-breadcrumbs class="q-pb-md">
       <template v-slot:separator>
         <q-icon size="1.5em" name="chevron_right" color="primary" />
@@ -8,7 +8,7 @@
       <q-breadcrumbs-el label="Departamento" icon="widgets" />
     </q-breadcrumbs>
 
-    <q-card class="my-card">
+    <q-card class="my-card" >
       <q-card-section>
         <div class="text-h5">Departamento</div>
       </q-card-section>
@@ -21,6 +21,18 @@
             clearable
             v-model="departmentBody.title"
             label="Departamento"
+            hint="Obrigatório, precisa ter 3 ou mais caracteres!"
+            lazy-rules
+            :rules="[
+              (val) => (val && val.length > 0) || 'Please type something',
+            ]"
+          />
+
+          <q-input
+            filled
+            clearable
+            v-model="local"
+            label="Local"
             hint="Obrigatório, precisa ter 3 ou mais caracteres!"
             lazy-rules
             :rules="[
@@ -89,6 +101,7 @@ export default {
     const $q = useQuasar();
     const title = ref(null);
     const status = ref(true);
+    const local= ref(false);
 
     var departmentBody = {
       title: "",

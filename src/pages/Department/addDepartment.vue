@@ -14,12 +14,12 @@
       </q-card-section>
 
       <q-card-section>
-        <q-form class="q-gutter-md" @submit="postDepartment" @reset="onReset">
+        <q-form class="q-gutter-md" @submit="postDepartment()" @reset="onReset">
           <q-input
             filled
             autofocus
             clearable
-            v-model="departmentBody.title"
+            v-model="title"
             label="Departamento"
             hint="Obrigatório, precisa ter 3 ou mais caracteres!"
             lazy-rules
@@ -33,11 +33,8 @@
             clearable
             v-model="local"
             label="Local"
-            hint="Obrigatório, precisa ter 3 ou mais caracteres!"
-            lazy-rules
-            :rules="[
-              (val) => (val && val.length > 0) || 'Please type something',
-            ]"
+
+
           />
           <q-toggle v-model="status" />
 
@@ -71,12 +68,15 @@ export default {
     async postDepartment() {
  
         try {
+          console.log(this.title)
+          console.log(this.departmentBody.initial)
+          console.log(this.departmentBody)
         await axios.post(
             `https://mes-app-a6wbv.ondigitalocean.app/department`,
             this.departmentBody
           );
-          //this.salvou = true;
-         // this.onSubmit();
+         // this.salvou = true;
+         //this.onSubmit();
 
          $q.notify({
             color: "green-13",
@@ -104,16 +104,19 @@ export default {
     const local= ref(false);
 
     var departmentBody = {
-      title: "",
-      initial: "EE",
+      title: "Indusssssdds",
+      initial: "EEss",
     };
+
+    //departmentBody.title = title;
 
     return {
       title,
       status,
       departmentBody,
 
-      onSubmit() {
+      async onSubmit() {
+        await this.postDepartment()
         if (this.salvou) {
           $q.notify({
             color: "green-13",

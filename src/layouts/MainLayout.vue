@@ -30,7 +30,7 @@
         <q-list>
           <q-item-label header> </q-item-label>
 
-          <EssentialLink
+          <EssentialLink 
             v-for="link in essentialLinks"
             :key="link.title"
             v-bind="link"

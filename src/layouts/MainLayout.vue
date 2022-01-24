@@ -107,6 +107,18 @@ const linksList = [
     icon: "settings",
     to: "/Department1",
   },
+
+{title: "Locações",
+    caption: "Locale",
+    icon: "locale",
+    to: "/assetTree",},
+
+  {
+    title: "Tipos de Serviço",
+    caption: "Service Type",
+    icon: "settings",
+    to: "/addServiceType",
+  },
 ];
 
 import { defineComponent, ref } from "vue";

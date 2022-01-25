@@ -17,7 +17,7 @@
       node-key="label"
       :filter="filter"
       v-model:selected="selected"
-      selected-color="red"
+      selected-color="primary"
    
   
    

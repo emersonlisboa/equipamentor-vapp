@@ -13,7 +13,8 @@
 
         <q-toolbar-title> Equipamentor </q-toolbar-title>
 
-        <div>Version v{{ $q.version }}</div>
+        <div>Version v{{ $q.version + " __" }} </div>
+       <q-avatar size="34px" color="orange">E</q-avatar>
       </q-toolbar>
     </q-header>
 

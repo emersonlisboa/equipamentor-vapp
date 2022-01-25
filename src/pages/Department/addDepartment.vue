@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md" style="max-width: 600px " >
+  <div class="q-pa-md " style="max-width: 600px "  >
     <q-breadcrumbs class="q-pb-md">
       <template v-slot:separator>
         <q-icon size="1.5em" name="chevron_right" color="primary" />
@@ -8,16 +8,19 @@
       <q-breadcrumbs-el label="Departamento" icon="widgets" />
     </q-breadcrumbs>
 
-    <q-card class="my-card" >
+    <q-card class="my-card shadow-10" >
       <q-card-section>
-        <div class="text-h5">Departamento</div>
+        <div class="text-h5 h4 text-weight-bolder" >Departamento</div>
       </q-card-section>
 
       <q-card-section>
-        <q-form class="q-gutter-md" @submit="postDepartment()" @reset="onReset">
+        <q-form class="q-gutter-md   " @submit="postDepartment()" @reset="onReset">
           <q-input
-            filled
+            outlined
             autofocus
+             border-color="grey-2"
+        bg-color="grey-2"
+    
             clearable
             v-model="title"
             label="Departamento"

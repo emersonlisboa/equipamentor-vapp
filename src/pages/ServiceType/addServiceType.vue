@@ -1,7 +1,9 @@
 <template>
+
   <q-page padding>
-    <h4>Service Type</h4>
-    <q-form @submit="onSubmit" @reset="onReset" class="q-pa-md-3" >
+
+    <h4 class='text-weight-bolder'>Service Type</h4>
+    <q-form @submit="onSubmit" @reset="onReset" class="q-pa-md-3 " >
       <q-input
         v-model="title"
         type="text"
@@ -41,7 +43,10 @@
         />
       </div>
     </q-form>
+   
+
   </q-page>
+
 </template>
 
 <script>

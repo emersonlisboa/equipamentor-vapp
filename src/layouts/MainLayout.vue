@@ -108,9 +108,9 @@ const linksList = [
     to: "/Department1",
   },
 
-{title: "Locações",
+{title: "Local",
     caption: "Locale",
-    icon: "locale",
+    icon: "place",
     to: "/assetTree",},
 
   {

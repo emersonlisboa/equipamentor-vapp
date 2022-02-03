@@ -12,6 +12,7 @@ const routes: RouteRecordRaw[] = [
     { path: '/Department', component: () => import('pages/Department/Department.vue') },
     { path: '/listLocal', component: () => import('pages/Local/listLocal.vue') },
     { path: '/addserviceType', component: () => import('pages/ServiceType/addServiceType.vue') },
+    { path: '/listserviceType', component: () => import('pages/ServiceType/listServiceType.vue') },
     { path: '/assetTree', component: () => import('pages/AssetTree/AssetTree.vue') },
   ],
   },

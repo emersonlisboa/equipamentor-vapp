@@ -10,7 +10,8 @@
         />
       </template>
     </q-input>
-    <!-- <h4>{{ selected }}</h4> !-->
+    <h4>{{ selected }}</h4> 
+
 
     <q-tree
       :nodes="simple"
@@ -33,17 +34,23 @@ export default {
     const filter = ref("");
     const filterRef = ref(null);
     const selected = ref(null);
+    const label = ref(null);
 
     return {
       filter,
       filterRef,
       selected,
+      label,
+
+     
 
       selectGoodService() {
         if (selected.value !== "Good service") {
           selected.value = "Good service";
         }
       },
+
+
 
       unselectNode() {
         selected.value = null;

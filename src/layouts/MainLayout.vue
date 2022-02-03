@@ -118,7 +118,7 @@ const linksList = [
     title: "Tipos de Serviço",
     caption: "Service Type",
     icon: "settings",
-    to: "/addServiceType",
+    to: "/listServiceType",
   },
 ];
 

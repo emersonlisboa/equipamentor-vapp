@@ -5,15 +5,15 @@
     </div>
 
     <q-dialog v-model="prompt" persistent>
-      <q-card style="min-width: 650px">
+      <q-card>
         <q-card-section>
           <div class="text-h6">Tipo de Serviço</div>
         </q-card-section>
 
-        <q-card-section class="q-pt-none">
-          <q-form @submit="onSubmit" @reset="onReset" class="q-pb-md">
+        <q-card-section class="q-row-6">
+          <q-form @submit="onSubmit" @reset="onReset">
             <q-input
-              v-model="title"
+              v-model="codigo"
               type="text"
               label="Código"
               outlined
@@ -25,24 +25,20 @@
               ]"
             />
 
-            <q-select
-              v-model="model"
-              :options="options"
+            <q-input
+              v-model="descricao"
               label="Descrição "
               outlined
               border-color="grey-2"
               bg-color="grey-2"
+              lazy-rules
+              :rules="[
+                (val) => (val && val.length > 0) || 'Please type something',
+              ]"
             />
 
             <q-input
-              label="Tempo"
-              type="number"
-              outlined
-              border-color="grey-2"
-              bg-color="grey-2"
-            />
-
-            <q-input
+              v-model="tempo"
               label="Tempo"
               type="number"
               outlined
@@ -51,21 +47,16 @@
             />
 
             <q-toggle v-model="status" color="primary" label="Status" />
-
-            <q-input
-              outlined
-              border-color="grey-2"
-              bg-color="grey-2"
-              type="date"
-              v-model="date"
-              mask="date"
-              :rules="['date']"
-            />
           </q-form>
         </q-card-section>
 
         <q-card-actions align="right" class="text-primary">
-          <q-btn label="Submit" type="submit" color="primary" />
+          <q-btn
+            label="Submit"
+            type="submit"
+            color="primary"
+            @click="cadastrar()"
+          />
           <q-btn
             label="Reset"
             type="reset"
@@ -84,8 +75,21 @@
       :columns="columns"
       row-key="name"
       v-model:selected="selection"
+      class="q-pl-xs q-pr-xs"
     >
       <template v-slot:top-right>
+        <q-input
+          borderless
+          dense
+          debounce="300"
+          v-model="filter"
+          placeholder="Search"
+        >
+          <template v-slot:append>
+            <q-icon name="search" />
+          </template>
+        </q-input>
+
         <q-btn
           color="primary"
           label="Adicionar"
@@ -153,14 +157,35 @@ const rows = [
     status: "ATIVO",
   },
 ];
+let status = true;
+let codigo;
+let descricao;
+let tempo;
 
 export default {
-  setup() {
+  data() {
     return {
       columns,
       rows,
       prompt: ref(false),
+      status,
+      codigo,
+      descricao,
+      tempo,
     };
+  },
+
+  methods: {
+    cadastrar() {
+      this.rows.push({
+        code: this.codigo,
+        description: this.descricao,
+        time: this.tempo,
+        status: this.status,
+        
+      });
+      this.$refs.myForm.resetValidation()
+    },
   },
 };
 </script>

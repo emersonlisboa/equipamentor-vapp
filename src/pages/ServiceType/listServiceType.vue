@@ -5,9 +5,10 @@
     </div>
 
     <q-dialog v-model="prompt" persistent>
-      <q-card>
+      <q-card style="width: 700px; max-width: 80vw;">
         <q-card-section>
-          <div class="text-h6">Tipo de Serviço</div>
+          <div class="text-h4">Tipo Serviços</div>
+           <div class="text-subtitle2">Cadastrar</div>
         </q-card-section>
 
         <q-card-section class="q-row-6">
@@ -16,7 +17,7 @@
               v-model="codigo"
               type="text"
               label="Código"
-              outlined
+              filled
               border-color="grey-2"
               bg-color="grey-2"
               lazy-rules
@@ -28,7 +29,7 @@
             <q-input
               v-model="descricao"
               label="Descrição "
-              outlined
+              filled
               border-color="grey-2"
               bg-color="grey-2"
               lazy-rules
@@ -41,22 +42,23 @@
               v-model="tempo"
               label="Tempo"
               type="number"
-              outlined
+               filled
               border-color="grey-2"
               bg-color="grey-2"
             />
 
             <q-toggle v-model="status" color="primary" label="Status" />
+            
           </q-form>
         </q-card-section>
 
         <q-card-actions align="right" class="text-primary">
           <q-btn
-            label="Submit"
-            type="submit"
-            color="primary"
-            @click="cadastrar()"
-          />
+              label="Submit"
+              type="submit"
+              color="primary"
+              @click="cadastrar()"
+            />
           <q-btn
             label="Reset"
             type="reset"
@@ -132,30 +134,6 @@ const rows = [
     time: "12h",
     status: "ATIVO",
   },
-  {
-    code: "ME0002",
-    description: "Manutenção Preventiva Mensal",
-    time: "12h",
-    status: "ATIVO",
-  },
-  {
-    code: "ME0003",
-    description: "Manutenção Preventiva Semestral",
-    time: "8h",
-    status: "ATIVO",
-  },
-  {
-    code: "ME0004",
-    description: "Manutenção Preventiva Anual",
-    time: "120h",
-    status: "ATIVO",
-  },
-  {
-    code: "ME0005",
-    description: "Manutenção Corretiva",
-    time: "12h",
-    status: "ATIVO",
-  },
 ];
 let status = true;
 let codigo;
@@ -182,9 +160,8 @@ export default {
         description: this.descricao,
         time: this.tempo,
         status: this.status,
-        
       });
-      this.$refs.myForm.resetValidation()
+      this.$refs.myForm.resetValidation();
     },
   },
 };

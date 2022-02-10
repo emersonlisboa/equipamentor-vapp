@@ -5,10 +5,10 @@
     </div>
 
     <q-dialog v-model="prompt" persistent>
-      <q-card style="width: 700px; max-width: 80vw;">
+      <q-card style="width: 700px; max-width: 80vw">
         <q-card-section>
           <div class="text-h4">Tipo Serviços</div>
-           <div class="text-subtitle2">Cadastrar</div>
+          <div class="text-subtitle2">Cadastrar</div>
         </q-card-section>
 
         <q-card-section class="q-row-6">
@@ -42,23 +42,22 @@
               v-model="tempo"
               label="Tempo"
               type="number"
-               filled
+              filled
               border-color="grey-2"
               bg-color="grey-2"
             />
 
             <q-toggle v-model="status" color="primary" label="Status" />
-            
           </q-form>
         </q-card-section>
 
         <q-card-actions align="right" class="text-primary">
           <q-btn
-              label="Submit"
-              type="submit"
-              color="primary"
-              @click="cadastrar()"
-            />
+            label="Submit"
+            type="submit"
+            color="primary"
+            @click="cadastrar()"
+          />
           <q-btn
             label="Reset"
             type="reset"
@@ -107,6 +106,7 @@
 
 <script>
 import { ref } from "vue";
+import { useQuasar } from "quasar";
 
 const columns = [
   {
@@ -153,6 +153,23 @@ export default {
     };
   },
 
+  setup() {
+    const $q = useQuasar();
+
+    return {
+      onSubmit() {
+        $q.notify({
+          color: "green-13",
+          textColor: "white",
+          icon: "cloud_done",
+          position: "center",
+          message: "Tipo de Serviço cadastrado com sucesso!",
+          timeout: 2000,
+        });
+      },
+    };
+  },
+
   methods: {
     cadastrar() {
       this.rows.push({
@@ -161,6 +178,7 @@ export default {
         time: this.tempo,
         status: this.status,
       });
+      this.onSubmit();
       this.$refs.myForm.resetValidation();
     },
   },

@@ -7,14 +7,15 @@
   "private": true,
   "scripts": {
     "test": "echo \"No test specified\" && exit 0",
-      "build": "quasar build",
-      "deploy": "vercel"
+    "build": "quasar build",
+    "deploy": "vercel"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "quasar": "^2.0.0",
+    "vue-router": "^4.0.0",
     "vuex": "^4.0.1"
   },
   "devDependencies": {

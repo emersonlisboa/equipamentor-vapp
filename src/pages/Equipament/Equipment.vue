@@ -161,6 +161,7 @@
     row-key="name"
   />
  
+ 
 
         </q-tab-panel>
 
@@ -191,19 +192,20 @@ export default {
     async postEquipment() {
       try {
         console.log(this.equipmentBody);
-        await axios.post(`https://mes-app-a6wbv.ondigitalocean.app/equipment`, this.equipmentBody);
+        await axios.post(`http://localhost:3000/equipment`, this.equipmentBody);
         this.salvou = true;
         this.onSubmit();
       } catch (error) {
         this.errorInput(error.response.data.message);
         console.log(error.response.data.message);
+        console.log(this.equipmentBody)
       }
     },
 
     async getEquipments() {
       try {
        
-       let data1 = await axios.get(`https://mes-app-a6wbv.ondigitalocean.app/equipment`);
+       let data1 = await axios.get(`http://localhost:3000/equipment`);
        this.equipamentos = data1.data
         console.log( this.equipamentos) 
      
@@ -232,7 +234,7 @@ export default {
   setup() {
     const $q = useQuasar();
     const accept = ref(false);
-    const localId = "ckx51hkj40002gcp6q1fgs7rb";
+    const localId = "ckzl6pxlg00562cipbp16r4er";
     const options = ["Teste 01", "Teste 02"];
 
     
@@ -244,7 +246,7 @@ export default {
       factory: "",
       model: "",
       criticalLevel: "",
-      localId: "ckx51hkj40002gcp6q1fgs7rb",
+      localId: "ckzl6pxlg00562cipbp16r4er",
       status: true,
     });
 

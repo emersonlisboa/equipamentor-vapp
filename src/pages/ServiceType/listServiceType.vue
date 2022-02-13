@@ -7,10 +7,12 @@
     <q-dialog v-model="prompt" persistent>
       <q-card style="width: 700px; max-width: 80vw">
         <q-card-section>
+          <q-spinner-gears color="green" size="3em"/>
           <div class="text-h4">Tipo Serviços</div>
-       <q-spinner-bars color="purple" />
+      
 
           <div class="text-subtitle2">Cadastrar</div>
+           
         </q-card-section>
 
         <q-card-section class="q-row-6">
@@ -19,7 +21,8 @@
               v-model="codigo"
               type="text"
               label="Código"
-              filled
+             outlined
+         
               border-color="grey-2"
               bg-color="grey-2"
               lazy-rules
@@ -31,7 +34,10 @@
             <q-input
               v-model="descricao"
               label="Descrição "
-              filled
+              :outlined = "this.focoInput"
+              :filled = "!this.focoInput"
+              @focus= "this.focoInput = !this.focoInput"
+            @blur = "this.focoInput = false"
               border-color="grey-2"
               bg-color="grey-2"
               lazy-rules
@@ -59,7 +65,9 @@
             type="submit"
             color="primary"
             @click="cadastrar()"
-          />
+          >
+<q-spinner-puff color="white" size="1em"/>
+          </q-btn>
           <q-btn
             label="Reset"
             type="reset"
@@ -187,6 +195,7 @@ let descricao;
 let tempo;
 let tabela = false;
 let icone = "dashboard_customize";
+let focoInput = false;
 
 function wrapCsvValue (val, formatFn) {
   let formatted = formatFn !== void 0
@@ -220,6 +229,7 @@ export default {
       tempo,
       tabela,
       icone,
+      focoInput,
     };
   },
 

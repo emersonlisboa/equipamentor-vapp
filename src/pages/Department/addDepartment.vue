@@ -26,7 +26,7 @@
             hint="Obrigatório, precisa ter 3 ou mais caracteres!"
             lazy-rules
             :rules="[
-              (val) => (val && val.length > 0) || 'Please type something',
+              (val) => (val && val.length > 3) || 'Please type something',
             ]"
           />
 

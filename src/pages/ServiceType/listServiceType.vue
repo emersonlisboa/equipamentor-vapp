@@ -7,11 +7,10 @@
     <q-dialog v-model="prompt" persistent>
       <q-card style="width: 700px; max-width: 80vw">
         <q-card-section>
-          <q-spinner-gears color="green" size="3em"/>
-          <div class="text-h4">Tipo Serviços</div>
+          <div class="text-h4 text-weight-bolder">#Tipo de Serviço</div>
       
 
-          <div class="text-subtitle2">Cadastrar</div>
+          <div class="text-subtitle2">[Cadastrar/Editar]</div>
            
         </q-card-section>
 

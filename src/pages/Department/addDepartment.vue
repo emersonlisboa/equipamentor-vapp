@@ -32,6 +32,7 @@
 
           <q-input filled clearable v-model="local" label="Local" />
           <q-toggle v-model="status" />
+          {{title}}  {{local}}
 
           <div>
             <q-btn label="Salvar" type="submit" color="primary" />
@@ -61,9 +62,9 @@ export default {
   methods: {
     async postDepartment() {
       try {
-        console.log(this.title);
-        console.log(this.departmentBody.initial);
-        console.log(this.departmentBody);
+       
+        console.log(this.departmentBody.title);
+      
         await axios.post(
           `https://mes-app-a6wbv.ondigitalocean.app/department`,
           this.departmentBody
@@ -87,21 +88,30 @@ export default {
   },
   setup() {
     const $q = useQuasar();
-    const title = ref(null);
+   const title = ref(null);
     const status = ref(true);
-    const local = ref(false);
-
-    var departmentBody = {
-      title: "Indusssssdds",
-      initial: "EEss",
+    const local = ref(null);
+    
+    const departmentBody = {
+      title: "",
+      initial: "" ,
+      local: "",
     };
+   
+   departmentBody.title = title
+   departmentBody.initial = "EE"
+   departmentBody.local = local
 
-    //departmentBody.title = title;
+
+ 
 
     return {
       title,
       status,
+      local,
       departmentBody,
+
+    
 
       async onSubmit() {
         await this.postDepartment();

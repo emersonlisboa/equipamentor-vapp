@@ -93,7 +93,7 @@ const linksList = [
     title: "Departmento",
     caption: "Department",
     icon: "account_balance",
-    to: "/addDepartment",
+    to: "/listDepartment",
   },
 
   {

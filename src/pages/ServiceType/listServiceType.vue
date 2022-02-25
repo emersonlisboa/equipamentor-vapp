@@ -5,10 +5,19 @@
     </div>
 
     <q-dialog v-model="prompt" persistent>
-      <q-card style="width: 700px; max-width: 80vw">
-        <q-card-section>
-          <div class="text-h4 text-weight-bolder">#Tipo de Serviço</div>
+
       
+      <q-card style="width: 700px; max-width: 80vw" >
+        <q-card-section >
+        
+       
+
+
+<q-btn   icon="close" flat round dense v-close-popup />
+
+
+          <div class="text-h4 text-weight-bolder">#Tipo de Serviço</div>
+        
 
           <div class="text-subtitle2">[Cadastrar/Editar]</div>
            
@@ -132,7 +141,6 @@ import { ref } from "vue";
 
 import { exportFile, useQuasar } from 'quasar'
 
-
 const columns = [
   {
     name: "codigo",
@@ -237,6 +245,7 @@ export default {
 
     return {
       onSubmit() {
+
         $q.notify({
           color: "green-13",
           textColor: "white",

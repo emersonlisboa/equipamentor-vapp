@@ -5,13 +5,13 @@
         <h4>Departamentos</h4>
           
 
-    <div class="column " >
+    <div class="column q-mr-md" >
       <div class="q-gutter-sm row reverse    ">
        <q-btn  push color="primary"  icon="add" label="Adicionar"  @click="toolbar = true" />
        <q-btn  outline color="primary" label="Export" @click="onClick" />
        <q-btn  outline color="primary" icon = "toc" @click="onClick" />
       </div>
-      <div class="col q-pt-md ">
+      <div class="col q-pt-md   ">
         <q-table
               title="Departamentos"
               :data="data"
@@ -23,11 +23,11 @@
 
     
         <q-dialog v-model="toolbar">
-      <q-card style="width: 70vw; max-width: 70vw;">
+      <q-card style="width: 75vw; max-width: 75vw;">
         <q-toolbar class="q-pa-md">
 
   
-          <q-toolbar-title><span class="text-h4 text-weight-bold">Departamento</span> </q-toolbar-title>
+          <q-toolbar-title><span class="text-h4 text-weight-bold">Adicionar Departamento</span> </q-toolbar-title>
 
           <q-btn flat round dense icon="close" v-close-popup />
         </q-toolbar>
@@ -42,8 +42,8 @@
 
 
 
-          <q-btn filled  color="primary" label="Inserir" @click="onClick" />
-          <q-btn outline class ="q-ml-md" color="primary" label="Reset" @click="onClick" />
+          <q-btn filled  color="primary" label="Salvar" @click="onClick" />
+          <q-btn outline class ="q-ml-md" color="primary" label="Apagar" @click="onClick" />
           </div>
           </div>
         </q-card-section>

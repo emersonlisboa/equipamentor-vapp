@@ -7,7 +7,6 @@
       <q-breadcrumbs-el label="Home" icon="home" to="/" />
       <q-breadcrumbs-el label="Departamento" icon="widgets" />
     </q-breadcrumbs>
-
     <q-card class="my-card shadow-10">
       <q-card-section>
         <div class="text-h5 h4 text-weight-bolder">Departamento</div>
@@ -32,7 +31,7 @@
 
           <q-input filled clearable v-model="local" label="Local" />
           <q-toggle v-model="status" />
-          {{title}}  {{local}}
+          {{ title }} {{ local }}
 
           <div>
             <q-btn label="Salvar" type="submit" color="primary" />
@@ -52,70 +51,25 @@
 
 
 <script>
-import { useQuasar } from "quasar";
-import { ref } from "vue";
-import axios from "axios";
+  import { useQuasar } from "quasar";
+  import { ref } from "vue";
+  import axios from "axios";
 
-export default {
-  name: "Department",
+  export default {
+    name: "Department",
 
-  methods: {
-    async postDepartment() {
-      try {
-       
-        console.log(this.departmentBody.title);
-      
-        await axios.post(
-          `https://mes-app-a6wbv.ondigitalocean.app/department`,
-          this.departmentBody
-        );
-        // this.salvou = true;
-        //this.onSubmit();
+    methods: {
+      async postDepartment() {
+        try {
+          console.log(this.departmentBody.title);
 
-        $q.notify({
-          color: "green-13",
-          textColor: "white",
-          icon: "cloud_done",
-          position: "center",
-          message: "Departamento cadastrado com sucesso!",
-          timeout: 3000,
-        });
-      } catch (error) {
-        this.errorInput(error.response.data.message);
-        console.log(error.response.data.message);
-      }
-    },
-  },
-  setup() {
-    const $q = useQuasar();
-   const title = ref(null);
-    const status = ref(true);
-    const local = ref(null);
-    
-    const departmentBody = {
-      title: "",
-      initial: "" ,
-      local: "",
-    };
-   
-   departmentBody.title = title
-   departmentBody.initial = "EE"
-   departmentBody.local = local
+          await axios.post(
+            `https://mes-app-a6wbv.ondigitalocean.app/department`,
+            this.departmentBody
+          );
+          // this.salvou = true;
+          //this.onSubmit();
 
-
- 
-
-    return {
-      title,
-      status,
-      local,
-      departmentBody,
-
-    
-
-      async onSubmit() {
-        await this.postDepartment();
-        if (this.salvou) {
           $q.notify({
             color: "green-13",
             textColor: "white",
@@ -124,25 +78,64 @@ export default {
             message: "Departamento cadastrado com sucesso!",
             timeout: 3000,
           });
+        } catch (error) {
+          this.errorInput(error.response.data.message);
+          console.log(error.response.data.message);
         }
       },
+    },
+    setup() {
+      const $q = useQuasar();
+      const title = ref(null);
+      const status = ref(true);
+      const local = ref(null);
 
-      errorInput(err) {
-        $q.notify({
-          color: "red-13",
-          textColor: "white",
-          icon: "report_gmailerrorred",
-          position: "center",
-          message: err,
-          timeout: 3000,
-        });
-      },
+      const departmentBody = {
+        title: "",
+        initial: "",
+        local: "",
+      };
 
-      onReset() {
-        title.value = null;
-        status.value = true;
-      },
-    };
-  },
-};
+      departmentBody.title = title;
+      departmentBody.initial = "EE";
+      departmentBody.local = local;
+
+      return {
+        title,
+        status,
+        local,
+        departmentBody,
+
+        async onSubmit() {
+          await this.postDepartment();
+          if (this.salvou) {
+            $q.notify({
+              color: "green-13",
+              textColor: "white",
+              icon: "cloud_done",
+              position: "center",
+              message: "Departamento cadastrado com sucesso!",
+              timeout: 3000,
+            });
+          }
+        },
+
+        errorInput(err) {
+          $q.notify({
+            color: "red-13",
+            textColor: "white",
+            icon: "report_gmailerrorred",
+            position: "center",
+            message: err,
+            timeout: 3000,
+          });
+        },
+
+        onReset() {
+          title.value = null;
+          status.value = true;
+        },
+      };
+    },
+  };
 </script>

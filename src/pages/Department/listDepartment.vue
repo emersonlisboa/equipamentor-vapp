@@ -3,7 +3,7 @@
     <q-page-container>
       <q-page padding>
 
-        <h3 >Departamentos</h3>
+        <h3>Departamentos</h3>
        
         
           
@@ -39,9 +39,9 @@
         <q-card-section  >
           <div class="q-gutter-lg" maximized >
           <q-input  outlined bg-color="grey-11" color="primary" v-model="codigo" type="text" label="Codigo" />
-          <q-input filled v-model="text" type="text" label="Descricao" />
-          <q-input  filled v-model="text" type="text" label="Local" />
-          <q-toggle outlined v-model="value" color="primary" label="Status" />
+          <q-input outlined  bg-color="grey-11" color="primary" v-model="text" type="text" label="Descricao" />
+          <q-input  outlined  bg-color="grey-11" color="primary" v-model="text" type="text" label="Local" />
+          <q-toggle outlined bg-color="grey-11" color="primary" v-model="value" label="Status" />
           <div class="gutter-md">
 
 
@@ -92,9 +92,8 @@ export default {
 <style >
 
 
-
-
 .q-field--outlined .q-field__control:before {
+   
     border: 2px solid rgba(175, 175, 175, 0);
     transition: border-color 0.36s cubic-bezier(1.4, 0, 0.2, 1);
 }

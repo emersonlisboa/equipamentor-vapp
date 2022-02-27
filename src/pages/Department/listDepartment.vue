@@ -2,7 +2,7 @@
   <q-layout>
     <q-page-container>
       <q-page padding>
-        <div class="text-weight-bold text-h4">Departamentos</div>
+        <div class="text-weight-bold text-h4 q-pb-md">Departamentos</div>
 
         <div class="row justify-between items-end content-start">
           <div class="col-md-6 col-sm-12 col-xs-12">
@@ -44,18 +44,17 @@
 
         <q-dialog v-model="toolbar">
           <q-card style="width: 85vw; max-width: 600px">
-            <q-toolbar class="q-pa-md" >
-              <q-toolbar-title class="q-pt-lg q-pb-lg" 
-                ><span class="text-h4 text-weight-bold"
-                  >Adicionar Departamento</span
-                >
+            <q-toolbar class="q-pa-md">
+              <q-toolbar-title class="q-pt-md q-pb-md">
+                <div class="row ">
+                  <q-icon name="account_balance" size="lg" />
+                  <div class="q-ml-md text-h4 text-weight-bold">Novo Departamento</div>
+                </div>
               </q-toolbar-title>
 
-              
               <q-btn flat round dense icon="close" v-close-popup />
             </q-toolbar>
 
-              
             <q-card-section>
               <div class="q-gutter-lg q-mt-md">
                 <q-input
@@ -89,7 +88,7 @@
                   v-model="status"
                   label="Status"
                 />
-                
+
                 <div class="gutter-md">
                   <q-btn
                     color="primary"
@@ -159,8 +158,8 @@
     transition: border-color 0.36s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .q-toolbar  {
+  .q-toolbar {
     background: #2e3a8a;
     color: white;
-}
+  }
 </style>>

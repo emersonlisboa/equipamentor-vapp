@@ -27,6 +27,7 @@
 
       @mouseover="miniState = false"
       @mouseout="miniState = true"
+    
     >
   
         <q-list>
@@ -41,7 +42,7 @@
     
     </q-drawer>
 
-    <q-page-container>
+    <q-page-container >
       <router-view />
     </q-page-container>
   </q-layout>
@@ -164,3 +165,9 @@ export default defineComponent({
   },
 });
 </script>
+<style>
+
+body {
+    background: #fafafa;
+}
+</style>

@@ -1,19 +1,41 @@
 <template>
-  <q-layout>
-    <q-page-container>
-      <q-page padding>
-        <h4 class="text-weight-bold">Departamentos</h4>
 
-        <div class="q-gutter-sm row reverse">
-          <q-btn
-            color="primary"
-            icon="add"
-            label="Adicionar"
-            @click="toolbar = true"
-          />
-          <q-btn outline color="primary" label="Export" @click="onClick" />
-          <q-btn outline color="primary" icon="toc" @click="onClick" />
+  <q-layout >
+ 
+    <q-page-container >
+        
+      <q-page padding>
+         <h4 class="text-weight-bold">Departamentos</h4>
+
+        <div class="row justify-between items-end content-start">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <q-input
+              outlined
+              bg-color="grey-12"
+              color="primary"
+              v-model="text"
+              type="text"
+              label="Localizar..."
+              dense
+            >
+              <template v-slot:append>
+                <q-icon name="search" />
+              </template>
+            </q-input>
+          </div>
+
+          <div class="q-gutter-md q-pt-md row reverse">
+            <q-btn
+              color="primary"
+              icon="add"
+              label="Adicionar"
+              @click="toolbar = true"
+            />
+            <q-btn outline color="primary" label="Export" @click="onClick" />
+            <q-btn outline color="primary" icon="toc" @click="onClick" />
+          </div>
         </div>
+
         <div class="col q-pt-md">
           <q-table
             title="Departamentos"
@@ -24,7 +46,7 @@
         </div>
 
         <q-dialog v-model="toolbar">
-          <q-card style="width: 85vw; max-width: 85vw">
+          <q-card style="width: 85vw; max-width: 600px">
             <q-toolbar class="q-pa-md">
               <q-toolbar-title class="q-pt-lg"
                 ><span class="text-h4 text-weight-bold"
@@ -36,12 +58,12 @@
             </q-toolbar>
 
             <q-card-section>
-              <div class="q-gutter-lg" maximized>
+              <div class="q-gutter-lg">
                 <q-input
                   outlined
                   bg-color="grey-11"
                   color="primary"
-                  v-model="codigo"
+                  v-model="code"
                   type="text"
                   label="Codigo"
                 />
@@ -49,7 +71,7 @@
                   outlined
                   bg-color="grey-11"
                   color="primary"
-                  v-model="text"
+                  v-model="description"
                   type="text"
                   label="Descricao"
                 />
@@ -57,7 +79,7 @@
                   outlined
                   bg-color="grey-11"
                   color="primary"
-                  v-model="text"
+                  v-model="local"
                   type="text"
                   label="Local"
                 />
@@ -65,11 +87,15 @@
                   outlined
                   bg-color="grey-11"
                   color="primary"
-                  v-model="value"
+                  v-model="status"
                   label="Status"
                 />
                 <div class="gutter-md">
-                  <q-btn color="primary" label="Salvar" @click="onClick" />
+                  <q-btn
+                    color="primary"
+                    label="Salvar"
+                    @click="createDepartment"
+                  />
                   <q-btn
                     outline
                     class="q-ml-md"
@@ -94,7 +120,13 @@
     name: "listDepartment",
 
     data() {
-      let codigo = "";
+      
+    },
+
+    methods: {
+      createDepartment() {
+        alert("Department created!!" + this.description);
+      },
     },
 
     setup() {
@@ -104,11 +136,16 @@
         bar2: ref(false),
         toolbar: ref(false),
         value: ref(false),
-        codigo: ref(""),
+        code: ref(""),
+        description: ref(""),
+        local: ref(""),
+        status: ref(true),
       };
     },
   };
 </script>
+
+
 
 <style >
   .q-field--outlined .q-field__control:before {

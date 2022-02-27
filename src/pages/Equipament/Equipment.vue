@@ -157,6 +157,7 @@
   <q-table
 
     :rows="equipamentos"
+    :columns="columns"
   
     row-key="name"
   />
@@ -205,7 +206,7 @@ export default {
     async getEquipments() {
       try {
        
-       let data1 = await axios.get(`http://localhost:3000/equipment`);
+       let data1 = await axios.get(`https://mes-app-a6wbv.ondigitalocean.app/equipment`);
        this.equipamentos = data1.data
         console.log( this.equipamentos) 
      
@@ -217,10 +218,12 @@ export default {
   },
 
   data(){
-    let equipamentos = [{title: 'CM'}]
+    
 
     return{ 
-      equipamentos
+      columns:[
+        { name:'title'}
+      ]
     }
 
     

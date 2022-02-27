@@ -1,11 +1,8 @@
 <template>
-
-  <q-layout >
- 
-    <q-page-container >
-        
+  <q-layout>
+    <q-page-container>
       <q-page padding>
-         <h4 class="text-weight-bold">Departamentos</h4>
+        <div class="text-weight-bold text-h4">Departamentos</div>
 
         <div class="row justify-between items-end content-start">
           <div class="col-md-6 col-sm-12 col-xs-12">
@@ -47,18 +44,20 @@
 
         <q-dialog v-model="toolbar">
           <q-card style="width: 85vw; max-width: 600px">
-            <q-toolbar class="q-pa-md">
-              <q-toolbar-title class="q-pt-lg"
+            <q-toolbar class="q-pa-md" >
+              <q-toolbar-title class="q-pt-lg q-pb-lg" 
                 ><span class="text-h4 text-weight-bold"
                   >Adicionar Departamento</span
                 >
               </q-toolbar-title>
 
+              
               <q-btn flat round dense icon="close" v-close-popup />
             </q-toolbar>
 
+              
             <q-card-section>
-              <div class="q-gutter-lg">
+              <div class="q-gutter-lg q-mt-md">
                 <q-input
                   outlined
                   bg-color="grey-11"
@@ -90,6 +89,7 @@
                   v-model="status"
                   label="Status"
                 />
+                
                 <div class="gutter-md">
                   <q-btn
                     color="primary"
@@ -119,9 +119,7 @@
   export default {
     name: "listDepartment",
 
-    data() {
-      
-    },
+    data() {},
 
     methods: {
       createDepartment() {
@@ -147,7 +145,7 @@
 
 
 
-<style >
+<style  >
   .q-field--outlined .q-field__control:before {
     border: 2px solid rgba(175, 175, 175, 0);
     transition: border-color 0.36s cubic-bezier(1.4, 0, 0.2, 1);
@@ -160,4 +158,9 @@
     background-color: rgba(255, 0, 0, 0);
     transition: border-color 0.36s cubic-bezier(0.4, 0, 0.2, 1);
   }
+
+  .q-toolbar  {
+    background: #2e3a8a;
+    color: white;
+}
 </style>>

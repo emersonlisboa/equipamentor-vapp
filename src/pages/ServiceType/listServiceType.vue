@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-md">
     <div class="row content-around">
-      <h4>Tipos de Serviços</h4>
+       <div class="text-weight-bold text-h4">Tipos de Serviços</div>
     </div>
 
     <q-dialog v-model="prompt" persistent>
@@ -83,7 +83,7 @@
       :columns="columns"
       row-key="name"
       v-model:selected="selection"
-      class="q-pl-xs q-pr-xs"
+      class="q-pl-xs q-pr-xs q-mt-md"
       :grid="tabela"
     >
       <template v-slot:top-left>

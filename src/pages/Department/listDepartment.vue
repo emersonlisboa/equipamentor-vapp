@@ -10,7 +10,6 @@
               outlined
               bg-color="grey-12"
               color="primary"
-              v-model="text"
               type="text"
               label="Localizar..."
               dense
@@ -28,27 +27,24 @@
               label="Adicionar"
               @click="toolbar = true"
             />
-            <q-btn outline color="primary" label="Export" @click="onClick" />
-            <q-btn outline color="primary" icon="toc" @click="onClick" />
+            <q-btn outline color="primary" label="Export" />
+            <q-btn outline color="primary" icon="toc" />
           </div>
         </div>
 
         <div class="col q-pt-md">
-          <q-table
-            title="Departamentos"
-            :data="data"
-            :columns="columns"
-            row-key="name"
-          />
+          <q-table title="Departamentos" row-key="name" />
         </div>
 
         <q-dialog v-model="toolbar">
           <q-card style="width: 85vw; max-width: 600px">
             <q-toolbar class="q-pa-md">
               <q-toolbar-title class="q-pt-md q-pb-md">
-                <div class="row ">
+                <div class="row">
                   <q-icon name="account_balance" size="lg" />
-                  <div class="q-ml-md text-h4 text-weight-bold">Novo Departamento</div>
+                  <div class="q-ml-md text-h4 text-weight-bold">
+                    Novo Departamento
+                  </div>
                 </div>
               </q-toolbar-title>
 
@@ -57,52 +53,44 @@
 
             <q-card-section>
               <div class="q-gutter-lg q-mt-md">
-                <q-input
-                  outlined
-                  bg-color="grey-11"
-                  color="primary"
-                  v-model="code"
-                  type="text"
-                  label="Codigo"
-                />
-                <q-input
-                  outlined
-                  bg-color="grey-11"
-                  color="primary"
-                  v-model="description"
-                  type="text"
-                  label="Descricao"
-                />
-                <q-input
-                  outlined
-                  bg-color="grey-11"
-                  color="primary"
-                  v-model="local"
-                  type="text"
-                  label="Local"
-                />
-                <q-toggle
-                  outlined
-                  bg-color="grey-11"
-                  color="primary"
-                  v-model="status"
-                  label="Status"
-                />
+                <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
+                  <q-input
+                    outlined
+                    bg-color="grey-11"
+                    color="primary"
+                    v-model="departmentBody.title"
+                    type="text"
+                    label="Descricao"
+                  />
 
-                <div class="gutter-md">
-                  <q-btn
+                  <q-input
+                    outlined
+                    bg-color="grey-11"
                     color="primary"
-                    label="Salvar"
-                    @click="createDepartment"
+                    v-model="departmentBody.initial"
+                    type="text"
+                    label="Iniciais"
                   />
-                  <q-btn
-                    outline
-                    class="q-ml-md"
+
+                  <q-toggle
+                    outlined
+                    bg-color="grey-11"
                     color="primary"
-                    label="Apagar"
-                    @click="onClick"
+                    v-model="status"
+                    label="Status"
                   />
-                </div>
+
+                  <div class="gutter-md">
+                    <q-btn label="Salvar" type="submit" @click="createDepartment()" color="primary" />
+                    <q-btn
+                      label="Apagar"
+                      type="reset"
+                      color="primary"
+                      flat
+                      class="q-ml-sm"
+                    />
+                  </div>
+                </q-form>
               </div>
             </q-card-section>
           </q-card>
@@ -114,29 +102,59 @@
 
 <script>
   import { ref } from "vue";
+  import axios from "axios";
+  import { useQuasar } from "quasar";
 
   export default {
     name: "listDepartment",
 
-    data() {},
-
     methods: {
-      createDepartment() {
-        alert("Department created!!" + this.description);
+      async createDepartment() {
+        console.log(this.departmentBody);
+        try {
+          await axios.post(
+            `https://mes-app-a6wbv.ondigitalocean.app/department`,
+            this.departmentBody
+          );
+        } catch (error) {
+          console.log(error.response.data.message);
+        }
       },
     },
 
     setup() {
+      const $q = useQuasar();
+      const status = ref(true);
+      const toolbar = ref(false);
+
+      var departmentBody = ref({
+        title: "",
+        initial: "",
+      });
+
       return {
-        icon: ref(false),
-        bar: ref(false),
-        bar2: ref(false),
-        toolbar: ref(false),
-        value: ref(false),
-        code: ref(""),
-        description: ref(""),
-        local: ref(""),
-        status: ref(true),
+        toolbar,
+        status,
+        departmentBody,
+
+        onSubmit() {
+         
+          $q.notify({
+            color: "green-13",
+            textColor: "white",
+            icon: "cloud_done",
+            position: "top",
+            message: "Departamento cadastrado com sucesso!",
+            timeout: 3000,
+          });
+        },
+
+        onReset() {
+          departmentBody.value = ref({
+            title: "",
+            initial: "",
+          });
+        },
       };
     },
   };

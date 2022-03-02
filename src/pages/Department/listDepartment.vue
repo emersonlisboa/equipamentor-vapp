@@ -40,7 +40,7 @@
 
         <div class="col q-pt-md">
           <q-table
-          class="my-sticky-header-table"
+            class="my-sticky-header-table"
             :rows="departments.data"
             :columns="Table"
             row-key="name"
@@ -48,6 +48,12 @@
             :loading="loading"
             :filter="filter"
           >
+            <template v-slot:body-cell-Status="props">
+              <q-td :props="props" class="q-gutter-x-sm">
+                {{ props.row.status == true ? "ATIVO" : "INATIVO" }}
+              </q-td>
+            </template>
+
             <template v-slot:body-cell-actions="props">
               <q-td :props="props" class="q-gutter-x-sm">
                 <q-btn
@@ -56,13 +62,15 @@
                   icon="edit"
                   dense
                   @click="onClick"
-                />
+                >
+                  <q-tooltip> Editar </q-tooltip>
+                </q-btn>
                 <q-btn
                   outline
                   color="negative"
                   icon="delete"
                   dense
-                  @click="onClick"
+                  @click="onRemoveDepartment(props.row)"
                 />
               </q-td>
             </template>
@@ -107,12 +115,6 @@
                     v-model="departmentBody.initial"
                     type="text"
                     label="Iniciais"
-                    lazy-rules
-                    :rules="[
-                      (val) =>
-                        (val && val.length <= 3 && val.length <= 5) ||
-                        'Preencha o campo initials corretamente...Precisa conter no mínimo 3 e máximo 5 caracteres!',
-                    ]"
                   />
 
                   <q-toggle
@@ -152,13 +154,13 @@
   import { onMounted, ref } from "vue";
   import axios from "axios";
   import { useQuasar } from "quasar";
+  import { teste } from "src/api/department";
 
   export default {
     name: "listDepartment",
 
     methods: {
       async createDepartment() {
-        console.log(this.departmentBody);
         this.departmentBody.initial = this.departmentBody.initial.toUpperCase();
 
         try {
@@ -166,6 +168,8 @@
             `https://mes-app-a6wbv.ondigitalocean.app/department`,
             this.departmentBody
           );
+          this.onReset();
+          // await this.handleDepartments();
         } catch (error) {
           console.log(error.response.data.message);
         }
@@ -180,6 +184,7 @@
       let viewStyle = ref(false);
       let loading = ref(false);
       let filter = ref("");
+      let t = teste;
 
       const Table = [
         {
@@ -219,7 +224,7 @@
         },
       ];
 
-      var departmentBody = ref({
+      let departmentBody = ref({
         title: "",
         initial: "",
         status: true,
@@ -231,9 +236,55 @@
             `https://mes-app-a6wbv.ondigitalocean.app/department`
           );
           loading.value = false;
+          console.log(t);
         } catch (error) {
           console.log(error);
         }
+      };
+
+      const removeDepartment = async (id) => {
+        try {
+          departments.value = await axios.delete(
+            `https://mes-app-a6wbv.ondigitalocean.app/department/${id}`
+          );
+          loading.value = false;
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      const onRemoveDepartment = async (department) => {
+        try {
+          console.log(department.title + department.id);
+          $q.dialog({
+            title: "Confirm",
+            message: `Are you sure you want to remove <strong>${department.title}</strong>`,
+            cancel: true,
+            persistent: true,
+            html: true,
+            cancel: {
+              
+              color: "primary",
+            },
+
+            ok: {
+             
+              color: "negative",
+            },
+          })
+            .onOk(async () => {
+              await removeDepartment(department.id);
+
+              await handleDepartments();
+              $q.notify({
+                color: "green",
+                message: "Successefully removed",
+              });
+            })
+            .onCancel(() => {
+              console.log(">>>> Cancel");
+            });
+        } catch (error) {}
       };
 
       onMounted(() => {
@@ -251,6 +302,8 @@
         viewStyle,
         loading,
         filter,
+        onRemoveDepartment,
+        removeDepartment,
 
         onSubmit() {
           $q.notify({
@@ -264,11 +317,10 @@
         },
 
         onReset() {
-          departmentBody.value = ref({
-            title: "",
-            initial: "",
-            status: "",
-          });
+          console.log("apagar");
+          (this.departmentBody.title = ""),
+            (this.departmentBody.initial = ""),
+            (this.departmentBody.status = "true");
         },
       };
     },
@@ -295,26 +347,15 @@
     background: #2e3a8a;
     color: white;
   }
-
-
-
-
-
-
-  
 </style>
 
 
 <style lang="sass">
 .my-sticky-header-table
- 
 
   .q-table__top,
- 
+
   thead tr:first-child th
     /* bg color is important for th; just specify one */
-    background-color: #f5f5f5  
-
- 
-
+    background-color: #f5f5f5
 </style>

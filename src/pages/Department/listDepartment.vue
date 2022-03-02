@@ -13,6 +13,7 @@
               type="text"
               label="Localizar..."
               dense
+              v-model="filter"
             >
               <template v-slot:append>
                 <q-icon name="search" />
@@ -27,8 +28,13 @@
               label="Adicionar"
               @click="toolbar = true"
             />
-            <q-btn outline color="primary"  label="Export" />
-            <q-btn outline color="primary" @click="viewStyle = !viewStyle " icon="toc" />
+            <q-btn outline color="primary" label="Export" />
+            <q-btn
+              outline
+              color="primary"
+              @click="viewStyle = !viewStyle"
+              icon="toc"
+            />
           </div>
         </div>
 
@@ -39,7 +45,29 @@
             row-key="name"
             :grid="viewStyle"
             :loading="loading"
-          />
+            :filter="filter"
+          >
+            <template v-slot:body-cell-actions="props">
+              <q-td :props="props" class="q-gutter-x-sm">
+                <q-icon
+                  name="edit"
+                  style="cursor: pointer"
+                  size="sm"
+                  color="primary"
+                  @click="viewStyle = !viewStyle"
+                  dense
+                />
+                <q-icon
+                  name="delete"
+                  style="cursor: pointer"
+                  size="sm"
+                  color="negative"
+                  @click="viewStyle = !viewStyle"
+                  dense
+                />
+              </q-td>
+            </template>
+          </q-table>
         </div>
 
         <q-dialog v-model="toolbar">
@@ -152,6 +180,7 @@
       let departments = ref("");
       let viewStyle = ref(false);
       let loading = ref(false);
+      let filter = ref("");
 
       const Table = [
         {
@@ -172,12 +201,21 @@
           sortable: true,
         },
 
-            {
+        {
           name: "Status",
           required: true,
           label: "Status",
           align: "left",
           field: "status",
+          sortable: true,
+        },
+
+        {
+          name: "actions",
+          required: true,
+          label: "Actions",
+          align: "right",
+          field: "actions",
           sortable: true,
         },
       ];
@@ -189,9 +227,7 @@
       });
 
       const handleDepartments = async () => {
-       
         try {
-          
           departments.value = await axios.get(
             `https://mes-app-a6wbv.ondigitalocean.app/department`
           );
@@ -215,6 +251,7 @@
         Table,
         viewStyle,
         loading,
+        filter,
 
         onSubmit() {
           $q.notify({

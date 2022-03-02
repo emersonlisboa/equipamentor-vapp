@@ -5,7 +5,7 @@
         <div class="text-weight-bold text-h4 q-pb-md">Departamentos</div>
 
         <div class="row justify-between items-end content-start">
-          <div class="col-md-6 col-sm-12 col-xs-12">
+          <div class="col-md-4 col-sm-12 col-xs-12">
             <q-input
               outlined
               bg-color="grey-12"
@@ -27,13 +27,19 @@
               label="Adicionar"
               @click="toolbar = true"
             />
-            <q-btn outline color="primary" label="Export" />
-            <q-btn outline color="primary" icon="toc" />
+            <q-btn outline color="primary"  label="Export" />
+            <q-btn outline color="primary" @click="viewStyle = !viewStyle " icon="toc" />
           </div>
         </div>
 
         <div class="col q-pt-md">
-          <q-table title="Departamentos" row-key="name" />
+          <q-table
+            :rows="departments.data"
+            :columns="Table"
+            row-key="name"
+            :grid="viewStyle"
+            :loading="loading"
+          />
         </div>
 
         <q-dialog v-model="toolbar">
@@ -41,10 +47,8 @@
             <q-toolbar class="q-pa-md">
               <q-toolbar-title class="q-pt-md q-pb-md">
                 <div class="row">
-                  <q-icon name="account_balance" size="lg" />
-                  <div class="q-ml-md text-h4 text-weight-bold">
-                    Novo Departamento
-                  </div>
+                  <q-icon name="account_balance" size="md" />
+                  <div class="q-ml-md text-h5">Novo Departamento</div>
                 </div>
               </q-toolbar-title>
 
@@ -52,7 +56,7 @@
             </q-toolbar>
 
             <q-card-section>
-              <div class="q-gutter-lg q-mt-md">
+              <div class="q-mt-lg">
                 <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
                   <q-input
                     outlined
@@ -61,6 +65,12 @@
                     v-model="departmentBody.title"
                     type="text"
                     label="Descricao"
+                    lazy-rules
+                    :rules="[
+                      (val) =>
+                        (val && val.length > 5) ||
+                        'Preencha o campo descrição corretamente...Precisa conter no mínimo 5 caracteres!',
+                    ]"
                   />
 
                   <q-input
@@ -70,18 +80,29 @@
                     v-model="departmentBody.initial"
                     type="text"
                     label="Iniciais"
+                    lazy-rules
+                    :rules="[
+                      (val) =>
+                        (val && val.length <= 3 && val.length <= 5) ||
+                        'Preencha o campo initials corretamente...Precisa conter no mínimo 3 e máximo 5 caracteres!',
+                    ]"
                   />
 
                   <q-toggle
                     outlined
                     bg-color="grey-11"
                     color="primary"
-                    v-model="status"
+                    v-model="departmentBody.status"
                     label="Status"
                   />
 
-                  <div class="gutter-md">
-                    <q-btn label="Salvar" type="submit" @click="createDepartment()" color="primary" />
+                  <div>
+                    <q-btn
+                      label="Salvar"
+                      type="submit"
+                      @click="createDepartment()"
+                      color="primary"
+                    />
                     <q-btn
                       label="Apagar"
                       type="reset"
@@ -101,7 +122,7 @@
 </template>
 
 <script>
-  import { ref } from "vue";
+  import { onMounted, ref } from "vue";
   import axios from "axios";
   import { useQuasar } from "quasar";
 
@@ -111,6 +132,8 @@
     methods: {
       async createDepartment() {
         console.log(this.departmentBody);
+        this.departmentBody.initial = this.departmentBody.initial.toUpperCase();
+
         try {
           await axios.post(
             `https://mes-app-a6wbv.ondigitalocean.app/department`,
@@ -126,19 +149,74 @@
       const $q = useQuasar();
       const status = ref(true);
       const toolbar = ref(false);
+      let departments = ref("");
+      let viewStyle = ref(false);
+      let loading = ref(false);
+
+      const Table = [
+        {
+          name: "Descição",
+          required: true,
+          label: "Descrição",
+          align: "left",
+          field: "title",
+          sortable: true,
+        },
+
+        {
+          name: "Iniciais",
+          required: true,
+          label: "Iniciais",
+          align: "left",
+          field: "initial",
+          sortable: true,
+        },
+
+            {
+          name: "Status",
+          required: true,
+          label: "Status",
+          align: "left",
+          field: "status",
+          sortable: true,
+        },
+      ];
 
       var departmentBody = ref({
         title: "",
         initial: "",
+        status: true,
+      });
+
+      const handleDepartments = async () => {
+       
+        try {
+          
+          departments.value = await axios.get(
+            `https://mes-app-a6wbv.ondigitalocean.app/department`
+          );
+          loading.value = false;
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      onMounted(() => {
+        loading.value = true;
+        handleDepartments();
+        console.log(departments.value);
       });
 
       return {
         toolbar,
         status,
         departmentBody,
+        departments,
+        Table,
+        viewStyle,
+        loading,
 
         onSubmit() {
-         
           $q.notify({
             color: "green-13",
             textColor: "white",
@@ -153,6 +231,7 @@
           departmentBody.value = ref({
             title: "",
             initial: "",
+            status: "",
           });
         },
       };

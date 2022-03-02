@@ -40,6 +40,7 @@
 
         <div class="col q-pt-md">
           <q-table
+          class="my-sticky-header-table"
             :rows="departments.data"
             :columns="Table"
             row-key="name"
@@ -49,21 +50,19 @@
           >
             <template v-slot:body-cell-actions="props">
               <q-td :props="props" class="q-gutter-x-sm">
-                <q-icon
-                  name="edit"
-                  style="cursor: pointer"
-                  size="sm"
+                <q-btn
+                  outline
                   color="primary"
-                  @click="viewStyle = !viewStyle"
+                  icon="edit"
                   dense
+                  @click="onClick"
                 />
-                <q-icon
-                  name="delete"
-                  style="cursor: pointer"
-                  size="sm"
+                <q-btn
+                  outline
                   color="negative"
-                  @click="viewStyle = !viewStyle"
+                  icon="delete"
                   dense
+                  @click="onClick"
                 />
               </q-td>
             </template>
@@ -296,4 +295,26 @@
     background: #2e3a8a;
     color: white;
   }
-</style>>
+
+
+
+
+
+
+  
+</style>
+
+
+<style lang="sass">
+.my-sticky-header-table
+ 
+
+  .q-table__top,
+ 
+  thead tr:first-child th
+    /* bg color is important for th; just specify one */
+    background-color: #f5f5f5  
+
+ 
+
+</style>

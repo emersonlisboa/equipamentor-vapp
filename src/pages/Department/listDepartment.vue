@@ -344,7 +344,7 @@
   }
 
   .q-toolbar {
-    background: #2e3a8a;
+    background: #04156F;
     color: white;
   }
 </style>

@@ -145,7 +145,7 @@ export default defineComponent({
       },
 
       contentActiveStyle: {
-        color: "black",
+        color: "white",
       },
 
       thumbStyle: {

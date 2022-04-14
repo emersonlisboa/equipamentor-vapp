@@ -6,11 +6,7 @@
       :todos="todos"
       :meta="meta"
     ></example-component>
-
- 
-
-    <q-btn color="primary" icon="check" label="OK" to='Department'  />
-  </q-page>
+</q-page>
 </template>
 
 <script lang="ts">

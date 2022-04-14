@@ -69,46 +69,46 @@ const linksList = [
     title: "Solicitações",
     caption: "Requests",
     icon: "add",
-    to: "/workOrder",
+    to: "/",
   },
 
   {
     title: "Locais",
     caption: "Locations",
     icon: "place",
-    to: "/workOrder",
+    to: "/",
   },
   {
     title: "Equipamentos",
     caption: "Assets",
     icon: "settings",
-    to: "/list-equipment",
+    to: "/",
   },
   {
     title: "Manutenção Preventiva (PM)",
     caption: "Preventive Maintenance",
     icon: "build",
-    to: "/listLocal",
+    to: "/",
   },
   {
     title: "Departmento",
     caption: "Department",
     icon: "account_balance",
-    to: "/listDepartment",
+    to: "/",
   },
 
   {
     title: "Funcionário",
     caption: "Funcionário",
     icon: "people",
-    to: "/Department",
+    to: "/",
   },
 
   {
     title: "Configurações",
     caption: "Settings",
     icon: "settings",
-    to: "/Department1",
+    to: "/",
   },
 
 {title: "Local",

@@ -137,9 +137,9 @@ module.exports = configure(function (ctx) {
       },
 
       manifest: {
-        name: `Quasar App`,
-        short_name: `Quasar App`,
-        description: `A Quasar Framework app`,
+        name: `Equipamentor App`,
+        short_name: `Equipamentor App`,
+        description: `A CMMS APP`,
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',

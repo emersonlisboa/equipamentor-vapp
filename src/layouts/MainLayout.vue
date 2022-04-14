@@ -59,12 +59,6 @@ const linksList = [
   },
 
   {
-    title: "Locais",
-    caption: "Locations",
-    icon: "place",
-    to: "/local",
-  },
-  {
     title: "Departmento",
     caption: "Department",
     icon: "account_balance",
